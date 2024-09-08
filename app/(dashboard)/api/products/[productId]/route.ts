@@ -18,10 +18,7 @@ export const GET = async (
   console.log(params.productId);
 
   try {
-    const { userId } = auth();
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 404 });
-    }
+   
     await connectToDB();
     const product = await Product.findById(params.productId).populate({
       path: "collections",
@@ -40,6 +37,10 @@ export const POST = async (
   { params }: { params: { productId: string } }
 ) => {
   try {
+    const { userId } = auth();
+    if (!userId) {
+      return new NextResponse("Unauthorized", { status: 404 });
+    }
     await connectToDB();
 
     const product = await Product.findById(params.productId);

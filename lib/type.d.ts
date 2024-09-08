@@ -18,7 +18,7 @@ type ProductType ={
     price: string,
     pay: string,
     sizes: [string],
-    category: [string],
+    category: string,
     collections:[string],
     colors: [string],
     tags: [string],

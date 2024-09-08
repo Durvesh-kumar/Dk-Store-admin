@@ -118,11 +118,7 @@ const ProductDetails: React.FC<ProductDetailsPropes> = ({ productData }) => {
         <div className="">
             <h3 className="font-bold text-lg text-gray-950 my-5">Category:</h3>
           <div className="flex items-center gap-2 flex-wrap">
-            {productData?.category?.map((item: string) => (
-              <Badge className="flex items-center justify-center px-4 py-2 bg-slate-200 border-gray-700 rounded-lg border shadow-md w-fit">
-                {item}
-              </Badge>
-            ))}
+            {productData?.category}
           </div>
         </div>
       </section>

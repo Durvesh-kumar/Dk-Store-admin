@@ -344,17 +344,10 @@ const ProductForm: React.FC<FOPRMPROPS> = ({ initialData }) => {
                 <FormItem>
                   <FormLabel className="text-lg">Category</FormLabel>
                   <FormControl>
-                    <MultiText
-                      placeHolder="Product category"
-                      value={field.value}
-                      onChange={(category) =>
-                        field.onChange([...field.value, category])
-                      }
-                      onRemove={(category) =>
-                        field.onChange([
-                          ...field.value.filter((item) => item !== category),
-                        ])
-                      }
+                    <Input
+                      placeholder="Product category"
+                      {...field}
+                      onKeyDown={handleKeyPress}
                     />
                   </FormControl>
                   <FormMessage className="text-orange-700" />

@@ -33,7 +33,7 @@ const ProductColumes: React.FC<ProductColumesPropes> = ({ data }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((item: any, index) => (
+        {data.map((item: ProductType, index) => (
           <TableRow>
             <TableCell className="font-medium">{index + 1}.</TableCell>
             <TableCell>
@@ -53,9 +53,7 @@ const ProductColumes: React.FC<ProductColumesPropes> = ({ data }) => {
               ))}
             </TableCell>
             <TableCell>
-              {item?.category.map((category: string) => (
-                <span>{category}&nbsp; </span>
-              ))}
+             {item?.category}
             </TableCell>
             <TableCell>{item.price}</TableCell>
             <TableCell>{item.pay}</TableCell>
