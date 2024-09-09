@@ -1,22 +1,22 @@
-import { z } from "zod";
+import { z, number } from 'zod';
 
 
 export const ProductValidation ={
     title: '',
     discription: '',
     media: [],
-    price: '',
-    pay: '' ,
+    price: 10,
+    pay: 10,
     sizes: [],
     category: '',
     collections:[],
     colors: [],
     tags: [],
-    brand: ''
+    brand: '',
 }
 
 export const formSchema = z.object({
-    title: z.string().max(30, {
+    title: z.string().trim().max(30, {
         message: "Title must be at least 30 characters."
     }).min(2, {
       message: "Title must be at least 2 characters.",
@@ -27,12 +27,12 @@ export const formSchema = z.object({
       message: "Title must be at least 2 characters.",
     }),
     media: z.array(z.string().url()),
-    price: z.string().min(2, {message: 'Price must be at least 2 digits'}).max(6, {message: "Price must be at least 6 digits"}),
+    price: z.coerce.number(),
     tags: z.array(z.string()),
     category: z.string().max(20).min(2),
     collections: z.array(z.string()),
     brand: z.string(),
     colors: z.array(z.string()),
     sizes: z.array(z.string()),
-    pay: z.string().min(2, {message: 'Price must be at least 2 digits'}).max(6, {message: "Price must be at least 6 digits"})
+    pay: z.coerce.number()
   })

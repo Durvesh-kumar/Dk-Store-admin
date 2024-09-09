@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { z, number } from 'zod';
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import ImageUpload from "@/components/coustem ui/ImageUpload";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { formSchema, ProductValidation } from "./Validation";
 import MultiText from "@/components/coustem ui/MultiText";
 import Delete from "@/components/coustem ui/Delete";
@@ -167,7 +167,7 @@ const ProductForm: React.FC<FOPRMPROPS> = ({ initialData }) => {
                   <ImageUpload
                     value={field.value}
                     onChange={(url) =>
-                      field.onChange([...field.value, field.value.push(url)])
+                      field.onChange(field.value=[...field.value, url])
                     }
                     onRemove={(url) =>
                       field.onChange([
@@ -193,6 +193,7 @@ const ProductForm: React.FC<FOPRMPROPS> = ({ initialData }) => {
                       type="number"
                       placeholder="Product price"
                       {...field}
+                      onKeyDown={handleKeyPress}
                     />
                   </FormControl>
                   <FormMessage className="text-orange-700" />
@@ -207,7 +208,7 @@ const ProductForm: React.FC<FOPRMPROPS> = ({ initialData }) => {
                 <FormItem>
                   <FormLabel className="text-lg">Pay</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="Product pay" {...field} />
+                    <Input onKeyDown={handleKeyPress} type="number" min={10} placeholder="Product pay" {...field} />
                   </FormControl>
                   <FormMessage className="text-orange-700" />
                 </FormItem>

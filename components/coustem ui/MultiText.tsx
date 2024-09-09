@@ -27,6 +27,7 @@ const MultiText: React.FC<MultiTextPropes> = ({
     <>
       <Input
         placeholder={placeHolder}
+        type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={(e) => {

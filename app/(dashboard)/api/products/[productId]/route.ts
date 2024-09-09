@@ -140,6 +140,11 @@ export const POST = async (
 export const DELETE = async (req:NextRequest, { params }: { params: { productId: string } }) => {
 
   try {
+    const { userId } = auth();
+    if (!userId) {
+      return new NextResponse("Unauthorized", { status: 404 });
+    }
+    
     await connectToDB();
 
     // cloudinary.config({
@@ -148,10 +153,7 @@ export const DELETE = async (req:NextRequest, { params }: { params: { productId:
     //   api_secret:process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET
     // }) 
 
-    const { userId } = auth();
-    if (!userId) {
-      return new NextResponse("Unauthorized", { status: 404 });
-    }
+    
 
     const product = await Product.findById(params.productId);
 
