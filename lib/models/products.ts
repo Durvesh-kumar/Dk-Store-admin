@@ -7,17 +7,11 @@ const productSchema = new mongoose.Schema({
   category: { type: String, required: true },
 
   price: {
-    type: mongoose.Schema.Types.Decimal128,
-    get: (v: mongoose.Schema.Types.Decimal128) => {
-      return parseFloat(v.toString());
-    },
+    type: Number,
     required: true,
   },
   pay: {
-    type: mongoose.Schema.Types.Decimal128,
-    get: (v: mongoose.Schema.Types.Decimal128) => {
-      return parseFloat(v.toString());
-    },
+    type: Number,
     required: true,
   },
   discription: { type: String, required: true },
