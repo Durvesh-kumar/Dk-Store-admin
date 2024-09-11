@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe'
+import { any } from 'zod';
 
-export const stripe = new Stripe(`${process.env.NEXT_PUBLIC_STRIP_SECRET_KEY}`, {
+export const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIP_SECRET_KEY!, {
     typescript: true
 });
 
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Method": "GET, POST, DELETE, OPTIONS",
+    "Access-Control-Allow-Method": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Contect-type, Authorization"
 }
 
@@ -19,6 +20,9 @@ export async function POST(req: NextRequest) {
     try {
         const { cartItems, customer} = await req.json();
 
+        // console.log(cartItems.map((cartItem: any)=> cartItem.quantity));
+        
+
         if(!cartItems || !customer){
             return new NextResponse("Not enough data to checkout", {status: 400})
         }
@@ -27,10 +31,38 @@ export async function POST(req: NextRequest) {
             payment_method_types: ["card"],
             mode: "payment",
             shipping_address_collection: {
-                allowed_countries: ["ID"]
+                allowed_countries: ["IN"]
             },
-            shipping_options:[]
+            shipping_options:[
+                {shipping_rate: "shr_1PxSZFSJdn7XAzbkJj2v0gFN"}, // EXPRESS
+                {shipping_rate: "shr_1Pxf2bSJdn7XAzbkipGk9SVN"} // FREE
+
+            ],
+            line_items: cartItems.map((cartItem: any)=> ({
+                price_data:{
+                    currency: "INR",
+                    product_data: {
+                        name: cartItem?.item?.title,
+                        metadata: {
+                            productId: cartItem.item._id,
+                            ...(cartItem?.size && {size: cartItem?.size}),
+                            ...(cartItem?.color && {color: cartItem?.color}),
+                        },
+                    },
+                    unit_amount: cartItem.item.pay * 100,
+                },
+                quantity: cartItem?.quantity,
+            })),
+            
+            client_reference_id: customer.clerkId,
+            success_url: `${process.env.ECOMMECRE_STORE_URL}/payment_success`,
+            cancel_url: `${process.env.ECOMMECRE_STORE_URL}/cart`,
+            
+            
         })
+        console.log(session.line_items?.data);
+        
+        return NextResponse.json(session, {headers: corsHeaders})
     } catch (error) {
         console.log("[checkout_POST]", error);
         return new NextResponse('Internal Server Error', {status: 500})

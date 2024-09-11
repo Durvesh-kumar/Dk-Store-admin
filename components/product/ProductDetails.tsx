@@ -14,6 +14,7 @@ import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Edit2 } from "lucide-react";
+import Gallery from "./Gallery";
 
 interface ProductDetailsPropes {
   productData: ProductType | null;
@@ -29,36 +30,17 @@ const ProductDetails: React.FC<ProductDetailsPropes> = ({ productData }) => {
       </h1>
       <hr className="bg-gray-900 py-0.5 my-10 shadow-lg rounded-xl" />
       <section className="flex items-center justify-center my-7">
-        {productData?.media[0] && (
-          <Carousel className="flex items-center justify-center rounded-lg border-2 border-gray-900 shadow-xl">
-            <CarouselContent>
-              {productData.media?.map((url) => (
-                <CarouselItem className="flex items-center justify-center w-[270px] h-[350px]">
-                  <Image
-                    src={url}
-                    alt="Product Image"
-                    className="object-fill h-full w-full mix-blend-multiply rounded"
-                    fill
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
-        )}
+        <Gallery media={productData?.media}/>
       </section>
       <section>
         <h2 className="text-gray-950 font-bold my-3 text-lg">Discription</h2>
-        <Textarea
-          readOnly
-          rows={8}
+        <p
           className="mt-3 scrollbar-hide px-3 text-sm"
         >
           {productData?.discription}
-        </Textarea>
+        </p>
       </section>
-      <section className="flex gap-x-11 items-center my-5">
+      <section className="flex gap-x-10 items-center my-5">
         <div className="flex items-center gap-4">
           <h1 className="text-gray-950 font-bold my-3 text-lg">
             Price &nbsp;:
@@ -106,7 +88,7 @@ const ProductDetails: React.FC<ProductDetailsPropes> = ({ productData }) => {
 
         <div className="">
             <h3 className="font-bold text-lg text-gray-950 my-5">Colors:</h3>
-          <div className="flex items-center gap-2 ">
+          <div className="flex items-center gap-2 flex-wrap">
             {productData?.colors?.map((color: string) => (
               <Badge className="flex items-center justify-center px-4 py-2 bg-slate-200 border-gray-700 rounded-lg border shadow-md w-fit">
                 {color}
