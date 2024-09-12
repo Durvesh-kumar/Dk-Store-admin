@@ -15,6 +15,7 @@ export const GET = async()=>{
             return {
                 _id: order._id,
                 customer: customer.name,
+                shippingRate: order.shippingRate,
                 products: order.products.length,
                 totalAmount: order.totalAmount,
                 createdAt: format(order.createdAt, "MMM do, yyy")  // add date-fns

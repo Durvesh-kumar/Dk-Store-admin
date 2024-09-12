@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe'
-import { any } from 'zod';
 
 export const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIP_SECRET_KEY!, {
     typescript: true
@@ -35,7 +34,7 @@ export async function POST(req: NextRequest) {
             },
             shipping_options:[
                 {shipping_rate: "shr_1Py1biSJdn7XAzbkbq5yZTkG"}, // EXPRESS
-                {shipping_rate: "shr_1Py1ZrSJdn7XAzbkKk4wxkki"} // FREE
+                {shipping_rate: "shr_1Py1ZrSJdn7XAzbkKk4wxkki"}, // FREE
 
             ],
             line_items: cartItems.map((cartItem: any)=> ({

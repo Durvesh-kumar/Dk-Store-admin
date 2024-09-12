@@ -61,13 +61,8 @@ export const POST = async (req: NextRequest)=>{
                 }
             });
 
-            // console.log("orderItem", orderItem);
-            
 
             await connectToDB();
-
-            console.log("customerInfo",customerInfo.clerkId);
-            
 
             const newOrder = new Order({
                 products: orderItem,
@@ -76,9 +71,6 @@ export const POST = async (req: NextRequest)=>{
                 totalAmount: session.amount_total ? session.amount_total / 100 : 0,
                 customerClerkId: customerInfo.clerkId,
             });
-
-            console.log("newOrder",newOrder.customerClerkId);
-            
 
             await newOrder.save()
 

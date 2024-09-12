@@ -22,7 +22,7 @@ export const naveLink = [
         name: "Orders"
     },
     {
-        url: "/users",
+        url: "/customers",
         Icon: <Users />,
         name: "Customers"
     },
