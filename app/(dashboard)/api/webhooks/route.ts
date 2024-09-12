@@ -35,7 +35,7 @@ export const POST = async (req: NextRequest)=>{
             }
     
             const shippingAddress = {
-                streetNumber: session?.shipping_details?.address?.line1,
+                street: session?.shipping_details?.address?.line1,
                 city: session?.shipping_details?.address?.city,
                 state: session?.shipping_details?.address?.state,
                 postalCode: session?.shipping_details?.address?.postal_code,
@@ -44,31 +44,41 @@ export const POST = async (req: NextRequest)=>{
     
             const retrieveSession = await stripe.checkout.sessions.retrieve(
                 session.id,
-                { expand: ['line_item.data.price.product']}
+                { expand: ['line_items.data.price.product']}
             )
     
             const lineItems = await retrieveSession?.line_items?.data;
 
-            const orderItem = lineItems?.map((lineItem)=>{
+            // console.log('webhooks_lineItems', lineItems);
+            
+
+            const orderItem = lineItems?.map((lineItem:any)=>{
                 return{
-                    product: lineItem.price?.metadata.productId,
-                    color:lineItem.price?.metadata.color || "N/A",
-                    size:lineItem.price?.metadata.size || "N/A",
+                    product: lineItem?.price?.product?.metadata?.productId,
+                    color:lineItem.price?.product?.metadata?.color || "N/A",
+                    size:lineItem.price?.product?.metadata?.size || "N/A",
                     quantity: lineItem.quantity,
                 }
             });
 
+            // console.log("orderItem", orderItem);
+            
+
             await connectToDB();
 
+            console.log("customerInfo",customerInfo.clerkId);
+            
+
             const newOrder = new Order({
-                customerClerkId: customerInfo.clerkId,
-                product: orderItem,
+                products: orderItem,
                 shippingAddress,
                 shippingRate: session?.shipping_cost?.shipping_rate,
                 totalAmount: session.amount_total ? session.amount_total / 100 : 0,
-
-
+                customerClerkId: customerInfo.clerkId,
             });
+
+            console.log("newOrder",newOrder.customerClerkId);
+            
 
             await newOrder.save()
 

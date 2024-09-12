@@ -34,8 +34,8 @@ export async function POST(req: NextRequest) {
                 allowed_countries: ["IN"]
             },
             shipping_options:[
-                {shipping_rate: "shr_1PxSZFSJdn7XAzbkJj2v0gFN"}, // EXPRESS
-                {shipping_rate: "shr_1Pxf2bSJdn7XAzbkipGk9SVN"} // FREE
+                {shipping_rate: "shr_1Py1biSJdn7XAzbkbq5yZTkG"}, // EXPRESS
+                {shipping_rate: "shr_1Py1ZrSJdn7XAzbkKk4wxkki"} // FREE
 
             ],
             line_items: cartItems.map((cartItem: any)=> ({
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
                     product_data: {
                         name: cartItem?.item?.title,
                         metadata: {
-                            productId: cartItem.item._id,
+                            productId: cartItem?.item?._id,
                             ...(cartItem?.size && {size: cartItem?.size}),
                             ...(cartItem?.color && {color: cartItem?.color}),
                         },
@@ -60,8 +60,6 @@ export async function POST(req: NextRequest) {
             
             
         })
-        console.log(session.line_items?.data);
-        
         return NextResponse.json(session, {headers: corsHeaders})
     } catch (error) {
         console.log("[checkout_POST]", error);

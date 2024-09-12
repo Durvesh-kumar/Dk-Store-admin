@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
-  customerClerlId: String,
+
   products: [
     {
       product: {
@@ -14,6 +14,10 @@ const orderSchema = new mongoose.Schema({
       quantity: Number,
     },
   ],
+  customerClerkId: {
+    type: String,
+    required: true
+  },
   shippingAddress: {
     street: String,
     city: String,
