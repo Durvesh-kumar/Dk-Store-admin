@@ -7,7 +7,7 @@ export const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIP_SECRET_KEY!, {
 
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Method": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Method": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Contect-type, Authorization"
 }
 

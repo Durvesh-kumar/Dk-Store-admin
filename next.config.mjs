@@ -6,7 +6,8 @@ const nextConfig = {
                 hostname: "res.cloudinary.com"
             }
         ]
-    }
+    },
+    
 };
 
 export default nextConfig;

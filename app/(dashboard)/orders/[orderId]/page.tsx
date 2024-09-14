@@ -2,6 +2,7 @@
 import Loader from '@/components/coustem ui/Loading';
 import OrderItemColums from '@/components/order/OrderItemsColems';
 import { Input } from '@/components/ui/input';
+import { CircleUser, MapPinHouse } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 
@@ -31,7 +32,7 @@ const OrderDetails = ({params}:{params: {orderId: string}}) => {
 
     useEffect(()=>{
         fetchData()
-    }, [orderDetails, customer]);
+    }, []);
 
     const address = orderDetails?.shippingAddress
     
@@ -41,14 +42,14 @@ const OrderDetails = ({params}:{params: {orderId: string}}) => {
         <hr className='p-0.5 bg-gray-900'/>
         <div className='flex items-center max-md:flex-col gap-5 justify-around'>
             <div className='flex flex-col gap-3 p-5 rounded shadow-md duration-500 hover:scale-105 hover:shadow-xl border'>
-                <p className='font-bold text-xl text-gray-950 flex items-center justify-center mb-4'>Customer Details</p>
+                <p className='font-bold text-xl text-gray-950 flex items-center justify-between px-4 mb-4'><span>Customer Details</span> <CircleUser className='w-8 h-8 text-blue-600' /></p>
                 <p className='flex gap-2'><span className='text-gray-950'>ID: </span><span className=' text-slate-600'>{customer?.clerkId}</span></p>
                 <p className='flex gap-2'><span className='text-gray-950'>Name: </span><span className=' text-slate-600'>{customer?.name}</span></p>
                 <p className='flex gap-2'><span className='text-gray-950'>Email: </span><span className=' text-slate-600'>{customer?.email}</span></p>
                 <p className='flex gap-2'><span className='text-gray-950'>Total Paid: </span ><span className=' text-slate-600'>{orderDetails?.totalAmount}</span></p>
             </div>
             <div className='flex flex-col gap-3 p-5 rounded shadow-md border duration-500 hover:scale-105 hover:shadow-xl'>
-                <p className='font-bold text-xl text-gray-950 flex items-center justify-center mb-4'>Shipping Address</p>
+                <p className='font-bold text-xl text-gray-950 flex items-center justify-between px-4 mb-4'><span>Shipping Address</span><MapPinHouse className='w-8 h-8 text-blue-600' /></p>
                 <p className='flex gap-2'><span className='text-gray-950'>Location: </span><span className=' text-slate-600'>{address?.street}</span></p>
                 <p className='flex gap-2'><span className='text-gray-950'>State: </span><span className=' text-slate-600'>{address?.state}</span></p>
                 <p className='flex gap-2'><span className='text-gray-950'>City: </span><span className=' text-slate-600'>{address?.city}</span></p>

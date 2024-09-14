@@ -1,0 +1,25 @@
+import { connectToDB } from "@/lib/db/mongoDB";
+import Product from "@/lib/models/products";
+import { NextResponse } from "next/server";
+
+export const GET = async()=>{
+    try {
+        await connectToDB();
+        const categorys = await Product.distinct('category');
+
+        const productsCategorys = [];
+
+        for(let categoty of categorys){
+            const products = await Product.findOne({categoty});
+            
+
+            if(products){
+                productsCategorys.push(products);
+            }
+        }
+        return NextResponse.json(productsCategorys, {status: 200});
+    } catch (error) {
+        console.log("[category_GET]", error);
+        return new NextResponse('Internal Server Error', {status: 500});
+    }
+}
