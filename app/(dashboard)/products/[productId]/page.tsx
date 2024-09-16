@@ -5,11 +5,9 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-interface ProductProps {
-  id: string
-}
 
-const Product: React.FC<ProductProps> = ({id}) => {
+
+const Product = () => {
 
   const useSearch = useSearchParams();
   const productId = useSearch.get("id");
