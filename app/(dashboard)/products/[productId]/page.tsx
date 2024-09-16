@@ -43,4 +43,5 @@ const Product: React.FC<ProductProps> = ({id}) => {
   );
 };
 
+export const dynamic = "force-dynamic";
 export default Product;

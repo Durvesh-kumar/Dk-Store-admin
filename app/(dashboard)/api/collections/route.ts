@@ -41,10 +41,17 @@ export const GET = async () => {
 
     const collections = await Collection.find().populate({path: 'products', model: Product}).sort({ createdAt: "desc" });
 
-    return NextResponse.json(collections, { status: 200 });
+    return NextResponse.json(collections, { status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": `${process.env.ECOMMECRE_STORE_URL}`,
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Headers": "Contect-Type"
+    }
+     });
     
   } catch (error) {
     console.log("[Collection_GET]", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 };
+export const dynamic = "force-dynamic";

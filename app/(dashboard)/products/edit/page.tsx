@@ -41,4 +41,5 @@ const Edit: React.FC<EditProps> = ({ id }) => {
   return loading ? <Loader /> : <ProductForm initialData={getData} />;
 };
 
+export const dynamic = "force-dynamic";
 export default Edit;

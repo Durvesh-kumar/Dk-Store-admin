@@ -61,3 +61,4 @@ const CollectionColumes: React.FC<CollectionColumesPropes> = ({ data }) => {
 };
 
 export default CollectionColumes;
+export const dynamic = "force-dynamic";

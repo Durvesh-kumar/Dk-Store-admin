@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import React from 'react'
-import { Textarea } from '../ui/textarea'
 import ProductInfo from './ProductInfo'
 
 interface CollectionDetailsPropes {
@@ -26,7 +25,7 @@ const CollectionDetails: React.FC<CollectionDetailsPropes> = ({collectionData}) 
         </section>
         <section>
             <h3 className='font-bold text-lg my-5'>Discription</h3>
-            <Textarea readOnly >{collectionData?.discription}</Textarea>
+            <p>{collectionData?.discription}</p>
         </section>
         <section>
             {

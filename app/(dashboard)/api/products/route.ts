@@ -82,17 +82,24 @@ export const GET = async(req: NextRequest)=>{
     try {
        await connectToDB() ;
        const products = await Product.find().populate({path: "collections", model: Collection}).sort({createdAt: 'desc'});
-       console.log((products));
        
 
        if(!products){
          return new NextResponse('Product not found', {status: 400})
        }
 
-       return NextResponse.json(products, {status: 200})
+       return NextResponse.json(products, {status: 200, 
+        headers: {
+            "Access-Control-Allow-Origin": `${process.env.ECOMMECRE_STORE_URL}`,
+            "Access-Control-Allow-Methods": "GET",
+            "Access-Control-Allow-Headers": "Contect-Type"
+        }
+
+       })
 
     } catch (error) {
         console.log("[Products_GET]", error);
     return new NextResponse("Internal Sever Error", { status: 500 });
     }
 }
+export const dynamic = "force-dynamic";

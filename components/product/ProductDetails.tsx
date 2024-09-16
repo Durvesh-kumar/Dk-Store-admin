@@ -1,13 +1,3 @@
-import React from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import Image from "next/image";
-import { Textarea } from "../ui/textarea";
 import indianCurrency from "@/lib/IndianPrice";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
@@ -45,19 +35,19 @@ const ProductDetails: React.FC<ProductDetailsPropes> = ({ productData }) => {
           <h1 className="text-gray-950 font-bold my-3 text-lg">
             Price &nbsp;:
           </h1>
-          <p className="text-gray-500">{indianCurrency(productData?.price)}</p>
+          <p className="text-gray-500 line-through">{indianCurrency(productData?.price)}</p>
         </div>
         <div className="flex items-center gap-4">
           <h1 className="text-gray-950 font-bold my-3 text-lg">Pay &nbsp;:</h1>
           <p className="text-gray-500">{indianCurrency(productData?.pay)}</p>
         </div>
       </section>
-      <section className="grid lg:grid-cols-2 lg:gap-4">
+      <section className="grid lg:grid-cols-2 lg:gap-4 text-xl">
         <div className="">
             <h3 className="font-bold text-lg text-gray-950 my-5">Collections:</h3>
           <div className="flex items-center gap-2 flex-wrap ">
             {productData?.collections?.map((collection: any) => (
-              <Badge className="flex items-center justify-center px-4 py-2 bg-slate-200 rounded-lg border border-gray-700 shadow-md w-fit">
+              <Badge className="flex items-center justify-center text-sm px-4 py-2 bg-slate-50 rounded-lg border border-gray-700 shadow-md w-fit">
                 {collection.title}
               </Badge>
             ))}
@@ -68,7 +58,7 @@ const ProductDetails: React.FC<ProductDetailsPropes> = ({ productData }) => {
             <h3 className="font-bold text-lg text-gray-950 my-5">Size:</h3>
           <div className="flex items-center gap-2 flex-wrap ">
             {productData?.sizes?.map((item: string) => (
-              <Badge className="flex items-center justify-center px-4 py-2 bg-slate-200 border-gray-700 rounded-lg border shadow-md w-fit">
+              <Badge className="flex items-center justify-center px-4 text-sm py-2 bg-slate-50 border-gray-700 rounded-lg border shadow-md w-fit">
                 {item}
               </Badge>
             ))}
@@ -79,7 +69,7 @@ const ProductDetails: React.FC<ProductDetailsPropes> = ({ productData }) => {
             <h3 className="font-bold text-lg text-gray-950 my-5">Tags:</h3>
           <div className="flex items-center gap-2 flex-wrap">
             {productData?.tags?.map((tage: string) => (
-              <Badge className="flex items-center justify-center px-4 py-2 bg-slate-200 border-gray-700 rounded-lg border shadow-md w-fit">
+              <Badge className="flex items-center justify-center text-sm px-4 py-2 bg-slate-50 border-gray-700 rounded-lg border shadow-md w-fit">
                 {tage}
               </Badge>
             ))}
@@ -90,16 +80,16 @@ const ProductDetails: React.FC<ProductDetailsPropes> = ({ productData }) => {
             <h3 className="font-bold text-lg text-gray-950 my-5">Colors:</h3>
           <div className="flex items-center gap-2 flex-wrap">
             {productData?.colors?.map((color: string) => (
-              <Badge className="flex items-center justify-center px-4 py-2 bg-slate-200 border-gray-700 rounded-lg border shadow-md w-fit">
+              <Badge className="flex items-center justify-center px-4 text-sm py-2 bg-slate-50 border-gray-700 rounded-lg border shadow-md w-fit">
                 {color}
               </Badge>
             ))}
           </div>
         </div>
 
-        <div className="">
+        <div className="flex items-center gap-2">
             <h3 className="font-bold text-lg text-gray-950 my-5">Category:</h3>
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-2 flex-wrap text-sm">
             {productData?.category}
           </div>
         </div>

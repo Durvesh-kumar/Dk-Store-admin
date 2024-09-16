@@ -1,47 +1,66 @@
-"use client"
-import Loader from '@/components/coustem ui/Loading';
-import OrderColumes from '@/components/order/OrderColumm';
-import { Input } from '@/components/ui/input';
-import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast';
+"use client";
+import Loader from "@/components/coustem ui/Loading";
+import OrderColumes from "@/components/order/OrderColumm";
+import { Input } from "@/components/ui/input";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  const [allOrders, setAllOrders] = useState([]);
+  const [queary, setQueary] =useState('')
+  const [loading, setLoading] = useState(true);
 
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true)
-
+  const getOrders = async () => {
     try {
-        const getOrders = async()=>{
-            const res = await fetch("/api/orders", {
-                method: "GET"
-            });
+      const res = await fetch("/api/orders", {
+        method: "GET",
+      });
 
-            if(res.ok){
-                const data = await res.json();
-                setLoading(false)
-                console.log(data);
-                
-                setOrders(data)
-            }
-        }
-
-        useEffect(()=>{
-            getOrders()
-        },[])
+      if (res.ok) {
+        const data = await res.json();
+        setLoading(false);
+        setAllOrders(data);
+        setOrders(data);
+      }
     } catch (error) {
-        console.log('[Order_Get]', error);
-        toast.error("Somting went wrong! Please try again")
+      console.log("[Order_Get]", error);
+      toast.error("Somting went wrong! Please try again");
     }
-  return loading ? <Loader/> : (
-    <div className='grid gap-5'>
-        <p className='text-3xl font-bold text-gray-950'>Orders</p>
-        <hr className='p-0.5 bg-gray-900 shadow-md my-5'/>
+  };
+  useEffect(() => {
+    getOrders();
+  }, []);
 
-        <Input type='text' placeholder='Search...' className='w-1/3'/>
+  const searchQueary = (queary:string)=>{
+    let filterData = orders;
+    if(queary){
+        filterData = orders.filter((item:OrderType)=>
+        item._id.toLocaleLowerCase().includes(queary.toLocaleLowerCase()) ||
+        item.customer.toLocaleLowerCase().includes(queary.toLocaleLowerCase())
+       )
+        setOrders(filterData)
+    }else{
+        setOrders(allOrders)
+    }
+  }
 
-        <OrderColumes data={orders}/>
+  useEffect(()=>{
+    searchQueary(queary)
+  }, [queary])
+  return loading ? (
+    <Loader />
+  ) : (
+    <div className="grid gap-5">
+      <p className="text-3xl font-bold text-gray-950">Orders</p>
+      <hr className="p-0.5 bg-gray-900 shadow-md my-5" />
+
+      <Input type="text" placeholder="Search..." value={queary} onChange={(e)=> setQueary(e.target.value)} className="w-1/2" />
+
+      <OrderColumes data={orders} />
     </div>
-  )
-}
+  );
+};
 
-export default Orders
+export const dynamic = "force-dynamic";
+export default Orders;

@@ -23,9 +23,16 @@ export const GET = async (
 
     const customer = await Customer.findOne({ clerkId: orderDetails.customerClerkId})
 
-    return NextResponse.json({orderDetails, customer}, { status: 200 });
+    return NextResponse.json({orderDetails, customer}, { status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": `${process.env.ECOMMECRE_STORE_URL}`,
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Headers": "Contect-Type"
+    }
+     });
   } catch (error) {
     console.log("[orderId_GET]", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 };
+export const dynamic = "force-dynamic";

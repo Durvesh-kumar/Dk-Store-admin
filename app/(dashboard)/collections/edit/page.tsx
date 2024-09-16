@@ -37,5 +37,5 @@ const Edit = () => {
     <CollectionForm initialData={getData} />
   )
 }
-
+export const dynamic = "force-dynamic";
 export default Edit

@@ -3,13 +3,6 @@ import Collection from "@/lib/models/Collection";
 import Product from "@/lib/models/products";
 import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
-import cloudinary from "next-cloudinary"
-
-// cloudinary.config({ 
-//   cloud_name: 'xx', 
-//   api_key: 'xx', 
-//   api_secret: 'xx' 
-// });
 
 export const GET = async (
   req: NextRequest,
@@ -25,7 +18,13 @@ export const GET = async (
       model: Collection,
     });
 
-    return NextResponse.json(product, { status: 200 });
+    return NextResponse.json(product, { status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": `${process.env.ECOMMECRE_STORE_URL}`,
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Headers": "Contect-Type"
+    }
+     });
   } catch (error) {
     console.log("[ProductId_GET]", error);
     return new NextResponse("Internal Server Error", { status: 500 });
@@ -147,14 +146,6 @@ export const DELETE = async (req:NextRequest, { params }: { params: { productId:
     
     await connectToDB();
 
-    // cloudinary.config({
-    //   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-    //   api_key:process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-    //   api_secret:process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET
-    // }) 
-
-    
-
     const product = await Product.findById(params.productId);
 
     if (!product) {
@@ -193,3 +184,4 @@ export const DELETE = async (req:NextRequest, { params }: { params: { productId:
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 };
+export const dynamic = "force-dynamic";

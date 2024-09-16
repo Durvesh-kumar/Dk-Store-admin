@@ -1,9 +1,6 @@
+import { stripe } from '@/lib/chackout/route';
 import { NextRequest, NextResponse } from 'next/server';
-import Stripe from 'stripe'
 
-export const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIP_SECRET_KEY!, {
-    typescript: true
-});
 
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
@@ -65,3 +62,4 @@ export async function POST(req: NextRequest) {
         return new NextResponse('Internal Server Error', {status: 500})
     }
 }
+export const dynamic = "force-dynamic";

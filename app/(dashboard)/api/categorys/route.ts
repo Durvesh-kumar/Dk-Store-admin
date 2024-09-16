@@ -17,9 +17,16 @@ export const GET = async()=>{
                 productsCategorys.push(products);
             }
         }
-        return NextResponse.json(productsCategorys, {status: 200});
+        return NextResponse.json(productsCategorys, {status: 200,
+            headers: {
+                "Access-Control-Allow-Origin": `${process.env.ECOMMECRE_STORE_URL}`,
+                "Access-Control-Allow-Methods": "GET",
+                "Access-Control-Allow-Headers": "Contect-Type"
+            }
+        });
     } catch (error) {
         console.log("[category_GET]", error);
         return new NextResponse('Internal Server Error', {status: 500});
     }
 }
+export const dynamic = "force-dynamic";

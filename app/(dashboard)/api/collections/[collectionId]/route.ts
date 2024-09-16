@@ -24,7 +24,13 @@ export const GET = async (
       );
     }
 
-    return NextResponse.json(collection, { status: 200 });
+    return NextResponse.json(collection, { status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": `${process.env.ECOMMECRE_STORE_URL}`,
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Headers": "Contect-Type"
+    }
+     });
   } catch (error) {
     console.log("[CollectionId_GET", error);
     return new NextResponse("Internal Server Error", { status: 500 });
@@ -112,3 +118,4 @@ export const DELETE = async (
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 };
+export const dynamic = "force-dynamic";

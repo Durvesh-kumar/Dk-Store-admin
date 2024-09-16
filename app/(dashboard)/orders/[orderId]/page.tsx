@@ -19,9 +19,9 @@ const OrderDetails = ({params}:{params: {orderId: string}}) => {
               
             if(res.ok){
                 const data = await res.json();
-                setLoading(false)
-                setCustomer(data?.customer)
-                setOrderDetails(data?.orderDetails)
+                setLoading(false);
+                setCustomer(data?.customer);
+                setOrderDetails(data?.orderDetails);
             }
             
         } catch (error) {
@@ -56,10 +56,10 @@ const OrderDetails = ({params}:{params: {orderId: string}}) => {
                 <p className='flex gap-2'><span className='text-gray-950'>Post Office: </span ><span className=' text-slate-600'>{address?.postalCode}</span></p>
             </div>
         </div>
-        <Input type='text' placeholder='Search...' className='w-1/3'/>
         <OrderItemColums data={orderDetails?.products} />
     </div>
   )
 }
 
-export default OrderDetails
+export const dynamic = "force-dynamic";
+export default OrderDetails;
