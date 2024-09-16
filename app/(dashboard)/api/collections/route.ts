@@ -39,7 +39,7 @@ export const GET = async () => {
   try {
     await connectToDB()
 
-    const collections = await Collection.find().populate({path: 'products', model: Product}).sort({ createdAt: "desc" });
+    const collections = await Collection.find<[]>().populate({path: 'products', model: Product}).sort({ createdAt: "desc" });
 
     return NextResponse.json(collections, { status: 200,
       headers: {

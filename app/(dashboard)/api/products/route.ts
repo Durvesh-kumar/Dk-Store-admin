@@ -81,7 +81,7 @@ export const GET = async(req: NextRequest)=>{
   
     try {
        await connectToDB() ;
-       const products = await Product.find().populate({path: "collections", model: Collection}).sort({createdAt: 'desc'});
+       const products = await Product.find<[]>().populate({path: "collections", model: Collection}).sort({createdAt: 'desc'});
        
 
        if(!products){

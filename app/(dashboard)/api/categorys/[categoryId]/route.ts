@@ -6,7 +6,7 @@ export const GET = async(req:NextRequest, {params}:{params: {categoryId: string}
     try {
         await connectToDB();
         
-        const products = await Product.find({category: params.categoryId})
+        const products = await Product.find<[]>({category: params.categoryId})
         
         return NextResponse.json(products, {status: 200,
             headers: {
