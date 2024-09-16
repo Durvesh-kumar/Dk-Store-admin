@@ -5,11 +5,8 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSearchParams } from "next/navigation";
 
-interface EditProps {
-  id: string;
-}
 
-const Edit: React.FC<EditProps> = ({ id }) => {
+const Edit = () => {
   const useSearch = useSearchParams();
   const productId = useSearch.get("id");
 
