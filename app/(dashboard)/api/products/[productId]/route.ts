@@ -165,13 +165,7 @@ export const DELETE = async (req:NextRequest, { params }: { params: { productId:
       )
     );
 
-    return NextResponse.json(product, { status: 200,
-      headers: {
-        "Access-Control-Allow-Origin": `${process.env.ECOMMECRE_STORE_URL}`,
-        "Access-Control-Allow-Methods": "GET",
-        "Access-Control-Allow-Headers": "Contect-Type"
-    }
-     });
+    return NextResponse.json(product, { status: 200 });
   } catch (error) {
     console.log("[ProductId_DELETE]", error);
     return new NextResponse("Internal Server Error", { status: 500 });
