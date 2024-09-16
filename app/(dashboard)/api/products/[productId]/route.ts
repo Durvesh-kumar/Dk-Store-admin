@@ -157,19 +157,6 @@ export const DELETE = async (req:NextRequest, { params }: { params: { productId:
 
     await Product.findByIdAndDelete(product._id);
 
-    //  await product?.media.map((image: string) => {
-    //   const url =`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/destroy `
-    //   const imageUrl = image.split('/')
-    //   const imageName = imageUrl[imageUrl.length-1].split('.')[0]
-      
-    //   cloudinary.CldUploadWidget.destroy(imageName, function(result) { console.log(result) });
-      
-    // });
-
-
-
-    // update collections
-
     await Promise.all(
       product.collections.map((collectionId: string) =>
         Collection.findByIdAndUpdate(collectionId, {
@@ -178,7 +165,13 @@ export const DELETE = async (req:NextRequest, { params }: { params: { productId:
       )
     );
 
-    return NextResponse.json(product, { status: 200 });
+    return NextResponse.json(product, { status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": `${process.env.ECOMMECRE_STORE_URL}`,
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Headers": "Contect-Type"
+    }
+     });
   } catch (error) {
     console.log("[ProductId_DELETE]", error);
     return new NextResponse("Internal Server Error", { status: 500 });
