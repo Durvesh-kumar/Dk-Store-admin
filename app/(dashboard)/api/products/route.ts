@@ -83,6 +83,7 @@ export const GET = async(req: NextRequest)=>{
        await connectToDB() ;
        const products = await Product.find<[]>().populate({path: "collections", model: Collection}).sort({createdAt: 'desc'});
        
+       
 
        if(!products){
          return new NextResponse('Product not found', {status: 400})
