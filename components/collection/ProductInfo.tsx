@@ -80,7 +80,7 @@ const ProductInfo: React.FC<ProductInfoPropes> = ({ data }) => {
               <Link
                 className="flex items-center justify-center bg-blue-600 hover:bg-white text-white hover:text-black rounded border"
                 href={{
-                  pathname: "products/edit",
+                  pathname: "/products/edit",
                   query: { id: item?._id },
                 }}
               >
