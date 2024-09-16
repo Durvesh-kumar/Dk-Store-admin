@@ -11,7 +11,6 @@ export const GET = async()=>{
 
         for(let category of categorys){
             const products = await Product.findOne<[]>({category});
-            console.log(products);
             
 
             if(products){
