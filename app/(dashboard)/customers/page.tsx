@@ -76,7 +76,7 @@ const Customer = () => {
         </TableHeader>
         <TableBody>
           {customers?.map((customer:CustomerType, index) => (
-            <TableRow>
+            <TableRow key={customer._id}>
               <TableCell className="font-medium">{index + 1}.</TableCell>
               <TableCell>
                 <Link

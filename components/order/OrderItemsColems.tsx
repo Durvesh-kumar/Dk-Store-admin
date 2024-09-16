@@ -59,7 +59,7 @@ const OrderItemColums: React.FC<OrderItemPropes> = ({ data }) => {
         </TableHeader>
         <TableBody>
           {data.map((item: OrderItemType, index: number) => (
-            <TableRow key={index}>
+            <TableRow key={item.product._id + index}>
               <TableCell>{index + 1}.</TableCell>
               <TableCell>{item?.product?.title}</TableCell>
               <TableCell>{item?.size}</TableCell>

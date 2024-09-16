@@ -34,7 +34,7 @@ const ProductColumes: React.FC<ProductColumesPropes> = ({ data }) => {
       </TableHeader>
       <TableBody>
         {data.map((item: ProductType, index) => (
-          <TableRow>
+          <TableRow key={item._id}>
             <TableCell className="font-medium">{index + 1}.</TableCell>
             <TableCell>
               <Link
@@ -49,7 +49,7 @@ const ProductColumes: React.FC<ProductColumesPropes> = ({ data }) => {
             </TableCell>
             <TableCell>
               {item?.collections.map((collection: any) => (
-                <span>{collection.title}&nbsp; </span>
+                <span key={collection._id}>{collection.title}&nbsp; </span>
               ))}
             </TableCell>
             <TableCell>

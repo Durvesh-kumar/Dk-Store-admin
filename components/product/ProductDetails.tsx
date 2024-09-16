@@ -47,7 +47,7 @@ const ProductDetails: React.FC<ProductDetailsPropes> = ({ productData }) => {
             <h3 className="font-bold text-lg text-gray-950 my-5">Collections:</h3>
           <div className="flex items-center gap-2 flex-wrap ">
             {productData?.collections?.map((collection: any) => (
-              <Badge className="flex items-center justify-center text-sm px-4 py-2 bg-slate-50 rounded-lg border border-gray-700 shadow-md w-fit">
+              <Badge key={collection?._id} className="flex items-center justify-center text-sm px-4 py-2 bg-slate-50 rounded-lg border border-gray-700 shadow-md w-fit">
                 {collection.title}
               </Badge>
             ))}
@@ -57,8 +57,8 @@ const ProductDetails: React.FC<ProductDetailsPropes> = ({ productData }) => {
         <div className="">
             <h3 className="font-bold text-lg text-gray-950 my-5">Size:</h3>
           <div className="flex items-center gap-2 flex-wrap ">
-            {productData?.sizes?.map((item: string) => (
-              <Badge className="flex items-center justify-center px-4 text-sm py-2 bg-slate-50 border-gray-700 rounded-lg border shadow-md w-fit">
+            {productData?.sizes?.map((item: string, index) => (
+              <Badge key={item + index} className="flex items-center justify-center px-4 text-sm py-2 bg-slate-50 border-gray-700 rounded-lg border shadow-md w-fit">
                 {item}
               </Badge>
             ))}
@@ -68,8 +68,8 @@ const ProductDetails: React.FC<ProductDetailsPropes> = ({ productData }) => {
         <div className="">
             <h3 className="font-bold text-lg text-gray-950 my-5">Tags:</h3>
           <div className="flex items-center gap-2 flex-wrap">
-            {productData?.tags?.map((tage: string) => (
-              <Badge className="flex items-center justify-center text-sm px-4 py-2 bg-slate-50 border-gray-700 rounded-lg border shadow-md w-fit">
+            {productData?.tags?.map((tage: string, index) => (
+              <Badge key={tage + index} className="flex items-center justify-center text-sm px-4 py-2 bg-slate-50 border-gray-700 rounded-lg border shadow-md w-fit">
                 {tage}
               </Badge>
             ))}
@@ -79,8 +79,8 @@ const ProductDetails: React.FC<ProductDetailsPropes> = ({ productData }) => {
         <div className="">
             <h3 className="font-bold text-lg text-gray-950 my-5">Colors:</h3>
           <div className="flex items-center gap-2 flex-wrap">
-            {productData?.colors?.map((color: string) => (
-              <Badge className="flex items-center justify-center px-4 text-sm py-2 bg-slate-50 border-gray-700 rounded-lg border shadow-md w-fit">
+            {productData?.colors?.map((color: string, index) => (
+              <Badge key={color + index} className="flex items-center justify-center px-4 text-sm py-2 bg-slate-50 border-gray-700 rounded-lg border shadow-md w-fit">
                 {color}
               </Badge>
             ))}

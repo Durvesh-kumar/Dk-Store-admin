@@ -32,7 +32,7 @@ const OrderColumes: React.FC<OrderColumesPropes> = ({ data }) => {
         </TableHeader>
         <TableBody>
           {data.map((order: OrderType, index) => (
-            <TableRow>
+            <TableRow key={order._id}>
               <TableCell className="font-medium">{index + 1}.</TableCell>
               <TableCell>
                 <Link

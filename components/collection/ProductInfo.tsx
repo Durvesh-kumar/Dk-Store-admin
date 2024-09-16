@@ -58,7 +58,7 @@ const ProductInfo: React.FC<ProductInfoPropes> = ({ data }) => {
       </TableHeader>
       <TableBody>
         {products?.map((item: any, index) => (
-          <TableRow>
+          <TableRow key={item._id}>
             <TableCell className="font-medium">{index + 1}.</TableCell>
             <TableCell>
               <Link
