@@ -9,8 +9,9 @@ export const GET = async()=>{
 
         const productsCategorys = [];
 
-        for(let categoty of categorys){
-            const products = await Product.findOne({categoty});
+        for(let category of categorys){
+            const products = await Product.findOne<[]>({category});
+            console.log(products);
             
 
             if(products){
