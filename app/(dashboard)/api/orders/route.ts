@@ -8,7 +8,7 @@ export const GET = async()=>{
     try {
         await connectToDB();
 
-        const orders = await Order.find<[]>().sort({createdAt: "desc"})
+        const orders = await Order.find().sort({createdAt: "desc"})
 
         const orderDetails = await Promise.all(orders.map( async(order)=>{
             const customer = await Customer.findOne({clerkId: order.customerClerkId});
