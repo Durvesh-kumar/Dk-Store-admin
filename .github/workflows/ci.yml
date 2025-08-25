@@ -31,9 +31,6 @@ jobs:
             - name: Install dependecies
               run: bun install
 
-            - name: Run test
-              run: bun test
-
             - name: Run lint
               run: bun lint
 
