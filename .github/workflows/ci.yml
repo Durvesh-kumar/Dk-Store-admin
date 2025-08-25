@@ -25,5 +25,22 @@ jobs:
             - name: Verify Bun installation
               run: bun --version
 
-            - name: Checkout repo
+            - name: Checkout repository
+              uses: actions/checkout@v5.0.0
+
+            - name: Install dependecies
+              run: bun install
+
+            - name: Run test
+              run: bun test
+
+            - name: Run lint
+              run: bun lint
+
+            - name: Upload production-ready build files
+              uses: actions/upload-artifact@v4.6.2
+              with:
+                name: build           # <--- This must match the CD workflow
+                path: .next
+              
               
