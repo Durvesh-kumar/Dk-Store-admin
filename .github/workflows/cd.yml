@@ -1,0 +1,44 @@
+name: "DK-Store-admin Continous Deployment/Delavery"
+
+on:
+    workflow_run:
+
+        workflows: ["DK-Store-admin Continous Intregration"]
+
+        types:
+            - completed
+
+jobs:
+    deploy:
+        runs-on: self-hosted
+        environment: production
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+        steps:
+
+            - name: Update ub
+              run: sudo apt-get update
+
+            - name: Setup bun
+              run: |
+                curl -fsSL https://bun.sh/install | bash
+                echo "$HOME/.bun/bin" >> $GITHUB_PATH
+            
+            - name: Verify Bun installation
+              run: bun --version
+
+            - name: Install pm2 Globelly
+              run: bun install pm2 -g
+
+            - name: Download build files
+              uses: actions/download-artifact@v5
+              with:
+                name: build
+                run-id: ${{ github.event.workflow_run.id}}
+                github-token: ${{ github.token }}
+
+            - name: Deploy on aws
+              run: pm2 start next dev
+                
+
+        
