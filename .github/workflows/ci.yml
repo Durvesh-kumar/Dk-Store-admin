@@ -1,0 +1,29 @@
+name: "DK-Store-admin Continous Intregration"
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+
+            - name: Update ubuntu
+              run: sudo apt-get update
+
+            - name: Setup bun
+              run: |
+                curl -fsSL https://bun.sh/install | bash
+                echo "$HOME/.bun/bin" >> $GITHUB_PATH
+            
+            - name: Verify Bun installation
+              run: bun --version
+
+            - name: Checkout repo
+              
