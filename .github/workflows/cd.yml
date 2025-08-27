@@ -29,11 +29,11 @@ jobs:
       - name: Verify Bun installation
         run: bun --version
 
-      - name: Install PM2 locally
-        run: npm install pm2
+      # - name: Install PM2 locally
+        # run: npm install pm2
 
-      - name: Run PM2 from local install
-        run: ./node_modules/.bin/pm2 start bun --name "next-app" -- dev
+      # - name: Run PM2 from local install
+        # run: ./node_modules/.bin/pm2 start bun --name "next-app" -- dev
 
 
       - name: Download build files
@@ -44,4 +44,4 @@ jobs:
           github-token: ${{ github.token }}
 
       - name: Deploy on AWS
-        run: pm2 start bun --name "next-app" -- dev
+        run: pm2 start bun dev
