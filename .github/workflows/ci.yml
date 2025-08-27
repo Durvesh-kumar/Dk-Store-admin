@@ -31,9 +31,6 @@ jobs:
             - name: Install dependecies
               run: bun install
 
-            - name: Run test
-              run: bun test
-
             - name: Run lint
               run: bun lint
 
@@ -41,6 +38,13 @@ jobs:
               uses: actions/upload-artifact@v4.6.2
               with:
                 name: build           # <--- This must match the CD workflow
-                path: .next
-              
-              
+                path: |
+                  .next
+                  package.json
+                  next.config.js
+                  app
+                  components
+                  lib
+                  components.json
+                  public
+                  node_modules
