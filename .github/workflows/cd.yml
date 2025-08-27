@@ -16,14 +16,6 @@ jobs:
       - name: Update apt
         run: sudo apt-get update
 
-      - name: Install unzip
-        run: sudo apt-get install -y unzip
-
-      - name: Install Node.js
-        run: |
-          curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-          sudo apt-get install -y nodejs
-
       - name: Setup Bun 
         run: | 
             curl -fsSL https://bun.sh/install | bash 
@@ -31,9 +23,6 @@ jobs:
 
       - name: Verify Bun installation
         run: bun --version
-
-      - name: Install PM2
-        run: npm install -g pm2
 
       - name: Download build files
         uses: actions/download-artifact@v5
