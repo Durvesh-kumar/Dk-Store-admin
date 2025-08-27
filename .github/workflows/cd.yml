@@ -1,39 +1,43 @@
-name: "DK-Store-admin Continous Deployment/Delavery"
+name: "DK-Store-admin Continuous Deployment/Delivery"
 
 on:
-    workflow_run:
-        workflows: ["DK-Store-admin Continous Intregration"]
-        types:
-            - completed
+  workflow_run:
+    workflows: ["DK-Store-admin Continuous Integration"]
+    types:
+      - completed
 
 jobs:
-    deploy:
-        runs-on: self-hosted
-        environment: production
-        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  deploy:
+    runs-on: self-hosted
+    environment: production
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
-        steps:
+    steps:
+      - name: Update apt
+        run: sudo apt-get update
 
-            - name: Update ub
-              run: sudo apt-get update
+      - name: Install Node.js
+        run: |
+          curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+          sudo apt-get install -y nodejs
 
-            - name: Setup bun
-              run: |
-                curl -fsSL https://bun.sh/install | bash
-                echo "$HOME/.bun/bin" >> $GITHUB_PATH
-            
-            - name: Verify Bun installation
-              run: bun --version
+      - name: Setup Bun
+        run: |
+          curl -fsSL https://bun.sh/install | bash
+          echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
-            - name: Install pm2 Globelly
-              run: bun install pm2 -g
+      - name: Verify Bun installation
+        run: bun --version
 
-            - name: Download build files
-              uses: actions/download-artifact@v5
-              with:
-                name: build
-                run-id: ${{ github.event.workflow_run.id}}
-                github-token: ${{ github.token }}
+      - name: Install PM2 globally
+        run: npm install -g pm2
 
-            - name: Deploy on aws
-              run: pm2 start bun --name "next-app" -- dev
+      - name: Download build files
+        uses: actions/download-artifact@v5
+        with:
+          name: build
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+
+      - name: Deploy on AWS
+        run: pm2 start bun --name "next-app" -- dev
