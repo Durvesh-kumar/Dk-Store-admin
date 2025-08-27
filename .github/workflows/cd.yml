@@ -16,11 +16,6 @@ jobs:
       - name: Update apt
         run: sudo apt-get update
 
-      - name: Install Node.js
-        run: |
-          curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-          sudo apt-get install -y nodejs
-
       - name: Setup Bun
         run: |
           curl -fsSL https://bun.sh/install | bash
@@ -29,12 +24,8 @@ jobs:
       - name: Verify Bun installation
         run: bun --version
 
-      # - name: Install PM2 locally
-        # run: npm install pm2
-
-      # - name: Run PM2 from local install
-        # run: ./node_modules/.bin/pm2 start bun --name "next-app" -- dev
-
+      - name: Install PM2 locally
+        run: bun install -g pm2
 
       - name: Download build files
         uses: actions/download-artifact@v5
