@@ -36,4 +36,4 @@ jobs:
                 github-token: ${{ github.token }}
 
             - name: Deploy on aws
-              run: pm2 start next dev
+              run: pm2 start bun --name "next-app" -- dev
