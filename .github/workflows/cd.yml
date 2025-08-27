@@ -2,7 +2,7 @@ name: "DK-Store-admin Continuous Deployment/Delivery"
 
 on:
   workflow_run:
-    workflows: ["DK-Store-admin Continuous Integration"]
+    workflows: ["DK-Store-admin Continous Intregration"]
     types:
       - completed
 
