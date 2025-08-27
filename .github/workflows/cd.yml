@@ -16,10 +16,10 @@ jobs:
       - name: Update apt
         run: sudo apt-get update
 
-      - name: Install Node.js
-        run: |
-          curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-          sudo apt-get install -y nodejs
+      # - name: Install Node.js
+      #   run: |
+      #     curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+      #     sudo apt-get install -y nodejs
 
       - name: Setup Bun
         run: |
