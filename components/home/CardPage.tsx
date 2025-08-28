@@ -42,7 +42,7 @@ const CardPage:React.FC<CardPagePropes> = ({totalRevenue, totalCustomer, totalOr
         <ShoppingCart className="max-sm:hidden"/>
       </CardHeader>
       <CardContent>
-        <p className="flex items-center text-xl gap-4"><ShoppingBag className="w-5 h-5" />{totalOrders}</p>
+        <p className="flex items-center text-xl gap-4">{totalOrders}</p>
       </CardContent>
     </Card>
    </div>
